@@ -5,6 +5,8 @@
  */
 package projetopoo;
 
+import projetopoo.gui.TClienteCastro;
+
 /**
  *
  * @author fabiano
@@ -16,6 +18,10 @@ public class ProjetoPoo {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        TClienteCastro TelaCadastroCliente = new TClienteCastro();
+        TelaCadastroCliente.setVisible(true);
+        TelaCadastroCliente.setTitle("Cadastro de Clientes");
+        TelaCadastroCliente.setResizable(false);
     }
     
 }
