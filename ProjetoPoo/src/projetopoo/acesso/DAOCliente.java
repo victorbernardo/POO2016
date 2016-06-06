@@ -96,12 +96,13 @@ public class DAOCliente implements IDAOCliente{
     @Override
     public ArrayList<Cliente> listar() throws ConexaoException, RepositorioException {
        Connection c = GC.conectar();
-        String sql = "SELECT NOME, CPF, CEP, ENDERECO, TELEFONE FROM Cliente";
+        String sql = "SELECT ID_CLIENTE , NOME, CPF, CEP, ENDERECO, TELEFONE FROM Cliente";
         ArrayList<Cliente> lista = new ArrayList();
         try{
             Statement stm = c.createStatement();
             ResultSet rs = stm.executeQuery(sql);
             while(rs.next()){
+                
                 Cliente cliente = new Cliente();
                 cliente.setIdCliente(rs.getInt("id_cliente"));
                 cliente.setNome(rs.getString("nome"));
@@ -109,8 +110,7 @@ public class DAOCliente implements IDAOCliente{
                 cliente.setCep(rs.getString("cep"));
                 cliente.setEndereco(rs.getString("endereco"));
                 cliente.setTelefone(rs.getString("telefone"));
-                
-                
+                                
                 lista.add(cliente);
             }
             return lista;
@@ -124,7 +124,7 @@ public class DAOCliente implements IDAOCliente{
     @Override
     public Cliente pesquisar(Integer id) throws ConexaoException, RepositorioException {
           Connection c = GC.conectar();
-        String sql = "SELECT NOME, CPF, CEP, ENDERECO, TELEFONE FROM Cliente WHERE Id_cliente=?";
+        String sql = "SELECT ID_CLIENTE , NOME, CPF, CEP, ENDERECO, TELEFONE FROM Cliente WHERE Id_cliente=?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setInt(1, id);
@@ -151,7 +151,7 @@ public class DAOCliente implements IDAOCliente{
     @Override
     public Cliente pesquisar(String cpf) throws ConexaoException, RepositorioException {
             Connection c = GC.conectar();
-        String sql = "SELECT NOME, CPF, CEP, ENDERECO, TELEFONE FROM Cliente WHERE cpf=?";
+        String sql = "SELECT ID_CLIENTE , NOME, CPF, CEP, ENDERECO, TELEFONE FROM Cliente WHERE cpf=?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1, cpf);

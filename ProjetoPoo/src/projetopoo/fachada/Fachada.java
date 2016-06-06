@@ -54,7 +54,20 @@ public class Fachada {
      * @return Lista de Cliente
      * @throws GeralException 
      */
-    public ArrayList<Cliente> listarTodosAnimais()throws GeralException{
+    public ArrayList<Cliente> listarTodosClientes()throws GeralException{
         return rnCliente.listarTodos();
+    }
+    
+    /**
+     * Retorna um registro do BD de Cliente
+     * @return Lista de Cliente
+     * @throws GeralException 
+     */
+    public  Cliente pesqisaClientePorCodigo(int codigoCliente)throws GeralException{
+        return rnCliente.pesquisarCodigo(codigoCliente);
+    }
+    public Cliente pesquisaClientePorCpf(String cpf) throws GeralException
+    {
+        return rnCliente.pesquisarCpf(cpf);
     }
 }

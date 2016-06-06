@@ -53,12 +53,12 @@ FUNCIONALIDADES (servem cliente GUI)
         return listar();
     }
     
-    public Cliente pesquisarCpf(Cliente cliente)throws GeralException{
-        return pesquisar(cliente.getCpf());
+    public Cliente pesquisarCpf(String cpf)throws GeralException{
+        return pesquisar(cpf);
     }
 
-    public Cliente pesquisarCodigo(Cliente cliente)throws GeralException{
-        return pesquisar(cliente.getIdCliente());
+    public Cliente pesquisarCodigo(int codigoCliente)throws GeralException{
+        return pesquisar(codigoCliente);
     }
 /*
 ###########################################################
