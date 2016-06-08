@@ -55,4 +55,14 @@ public class Fornecedor {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+     public Boolean isValido()
+    {   
+        if (this.razaoSocial== null){
+            return false;
+        }
+        if (this.cpnj == null){
+            return false;
+        }
+        return true;
+    }
 }
