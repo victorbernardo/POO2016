@@ -18,6 +18,7 @@ public interface IDAOProduto {
     public void inserir(Produto p) throws ConexaoException, RepositorioException;
     public void excluir(Produto p)throws ConexaoException, RepositorioException;
     public void alterar(Produto p)throws ConexaoException, RepositorioException;
-    public void buscar(Integer id)throws ConexaoException, RepositorioException;
     public ArrayList<Produto> listar()throws ConexaoException, RepositorioException;
+    public Produto pesquisar(Integer id) throws ConexaoException,RepositorioException;
+    public Produto pesquisar(String nome) throws ConexaoException,RepositorioException;
 }

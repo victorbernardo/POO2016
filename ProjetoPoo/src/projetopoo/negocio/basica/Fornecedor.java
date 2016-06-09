@@ -10,7 +10,7 @@ package projetopoo.negocio.basica;
  * @author victor
  */
 public class Fornecedor {
-    private int idFornecedor;
+    private Integer idFornecedor;
     private String endereco;
     private String cpnj;
     private String razaoSocial;
@@ -20,8 +20,11 @@ public class Fornecedor {
         return idFornecedor;
     }
 
-    public void setIdFornecedor(int idFornecedor) {
+    public void setIdFornecedor(Integer idFornecedor) {
         this.idFornecedor = idFornecedor;
+    }
+    public void setIdFornecedor(String idFornecedor) {
+        this.idFornecedor = Integer.parseInt(idFornecedor);
     }
 
     public String getEndereco() {

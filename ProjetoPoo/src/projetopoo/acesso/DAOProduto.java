@@ -23,14 +23,22 @@ import projetopoo.util.GerenciadorConexaoMySQL;
  */
 public class DAOProduto implements IDAOProduto{
     private final GerenciadorConexao GC = GerenciadorConexaoMySQL.getInstancia();
+
+    /**
+     *
+     * @param p
+     * @throws ConexaoException
+     * @throws RepositorioException
+     */
     @Override
     public void inserir(Produto p) throws ConexaoException, RepositorioException {
         Connection c = GC.conectar();
-        String sql = "INSERT INTO produto (Nome, IdFornecedor) VALUES (?,?)";
+        String sql = "INSERT INTO produto(id_Fornecedor,Nome, Descricao) VALUES (?,?,?)";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
-            pstm.setString(1, p.getNome());
-            pstm.setInt(2, p.getIdFornecedor());
+            pstm.setInt(1, p.getIdFornecedor());
+            pstm.setString(2, p.getNome());
+            pstm.setString(3, p.getDescricao());
            
             pstm.execute();
         }catch(SQLException e){
@@ -71,8 +79,7 @@ public class DAOProduto implements IDAOProduto{
             GC.desconectar(c);
         }
     }
-    
-
+ 
     @Override
     public ArrayList<Produto> listar() throws ConexaoException, RepositorioException {
         Connection c = GC.conectar();
@@ -98,10 +105,48 @@ public class DAOProduto implements IDAOProduto{
             GC.desconectar(c);
         }
     }
+    
+    @Override
+    public Produto pesquisar(Integer id) throws ConexaoException, RepositorioException {
+        Produto p = null;
+        String sql = "SELECT IdProduto, nome, idFornecedor, Qtd FROM produto WHERE idProduto=?";
+        try{
+            PreparedStatement pstm = GC.conectar().prepareStatement(sql);
+            pstm.setInt(1, id);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if(rs.next()){
+                    p = new Produto();
+                    p.setIdProduto(rs.getInt("codigo"));
+                    p.setNome(rs.getString("nome"));
+                    p.setIdFornecedor(rs.getInt("fornecedor"));
+                }
+            }
+            return p;
+        }catch(SQLException e){
+            throw new RepositorioException();
+        }
+    }
 
     @Override
-    public void buscar(Integer id) throws ConexaoException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Produto pesquisar(String nome) throws ConexaoException, RepositorioException {
+        Produto p = null;
+        String sql = "SELECT Id_produto, Nome,Descricao, id_Fornecedor FROM produto WHERE Nome=?";
+        try{
+            PreparedStatement pstm = GC.conectar().prepareStatement(sql);
+            pstm.setString(1, nome);
+            try (ResultSet rs = pstm.executeQuery()) {
+                if(rs.next()){
+                    p = new Produto();
+                    p.setIdProduto(rs.getInt("codigo"));
+                    p.setNome(rs.getString("nome"));
+                    p.setDescricao(rs.getString("descricao"));
+                    p.setIdFornecedor(rs.getInt("fornecedor"));
+                }
+            }
+            return p;
+        }catch(SQLException e){
+            throw new RepositorioException();
+        }
     }
     
     

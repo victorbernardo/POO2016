@@ -13,6 +13,7 @@ public class Produto {
     private Integer idProduto;
     private Integer IdFornecedor;
     private String nome;
+    private String descricao;
 
     /**
      * @return the idProduto
@@ -41,6 +42,9 @@ public class Produto {
     public void setIdFornecedor(Integer IdFornecedor) {
         this.IdFornecedor = IdFornecedor;
     }
+    public void setIdFornecedor(String IdFornecedor){
+        this.IdFornecedor = Integer.parseInt(IdFornecedor);
+    }
 
     /**
      * @return the nome
@@ -61,5 +65,19 @@ public class Produto {
             return false;
         else
             return true;
+    }
+
+    /**
+     * @return the descricao
+     */
+    public String getDescricao() {
+        return descricao;
+    }
+
+    /**
+     * @param descricao the descricao to set
+     */
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
