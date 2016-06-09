@@ -7,6 +7,7 @@ package projetopoo.acesso;
 
 import java.util.ArrayList;
 import projetopoo.erro.ConexaoException;
+import projetopoo.erro.GeralException;
 import projetopoo.erro.RepositorioException;
 import projetopoo.negocio.basica.Pagamento;
 
@@ -54,5 +55,6 @@ public interface IDAOPagamento {
      * @throws projetopoo.erro.RepositorioException
      */
     public Pagamento pesquisar(Integer id_pagamento) throws ConexaoException,RepositorioException;
+    void inserir(Pagamento pagamento)throws GeralException, ConexaoException,RepositorioException;
 }
 

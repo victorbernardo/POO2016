@@ -4,7 +4,11 @@ import projetopoo.erro.GeralException;
 import projetopoo.negocio.RNCliente;
 import projetopoo.negocio.basica.Cliente;
 import java.util.ArrayList;
+import projetopoo.erro.ConexaoException;
+import projetopoo.erro.RepositorioException;
+import projetopoo.negocio.RNPagamento;
 import projetopoo.negocio.RNProduto;
+import projetopoo.negocio.basica.Pagamento;
 import projetopoo.negocio.basica.Produto;
 
 /**
@@ -15,10 +19,12 @@ public class Fachada {
     private static Fachada instancia;
     private static RNCliente rnCliente;
     private static RNProduto rnProduto;
+    private static RNPagamento rnPagamento;
     
     private Fachada(){
         rnCliente = new RNCliente();
         rnProduto = new RNProduto();
+        rnPagamento = new RNPagamento();
     }
     
     public static Fachada getInstancia(){
@@ -37,6 +43,9 @@ public class Fachada {
       public void  salvarNovoProduto(Produto p) throws GeralException{
         rnProduto.salvarNovo(p);
     }
+      public void  salvarNovoPagamento(Pagamento pagamento) throws GeralException, ConexaoException, RepositorioException{
+        rnPagamento.salvarNovo(pagamento);
+    }
     
     /**
      * Solicita a atualizacao dos dados no BD do Cliente
@@ -49,7 +58,9 @@ public class Fachada {
      public void salvarAlteracaoProduto(Produto p) throws GeralException{
         rnProduto.salvarAlteracao(p);
     }
-    
+    public void salvarAlteracaoPagamento(Pagamento pagamento) throws GeralException, RepositorioException, ConexaoException{
+        rnPagamento.salvarAlteracao(pagamento);
+    }
     /**
      * Solicita a exclusao de um registro do BD de Cliente
      * @param a Objeto com o codigo do Cliente
@@ -61,7 +72,9 @@ public class Fachada {
      public void excluirProduto(Produto p)throws GeralException{
         rnProduto.excluirRegistro(p);
     }
-    
+    public void excluirPagamento(Pagamento pagamento)throws GeralException{
+        rnPagamento.excluirRegistro(pagamento);
+    }
     /**
      * Retorna uma lista com todos os registros do BD de Cliente
      * @return Lista de Cliente
@@ -73,7 +86,9 @@ public class Fachada {
      public ArrayList<Produto> listarTodosProdutos()throws GeralException{
         return rnProduto.listarTodos();
     }
-    
+    public ArrayList<Pagamento> listarTodosPagamentos()throws GeralException{
+        return rnPagamento.listarTodos();
+    }
     /**
      * Retorna um registro do BD de Cliente
      * @param codigoCliente
@@ -92,6 +107,9 @@ public class Fachada {
     public  Produto pesqisaProdutoPorCodigo(Produto codigoProduto)throws GeralException{
         return rnProduto.pesquisarCodigo(codigoProduto);
     }
+    public  Pagamento pesquisaPagamentoPorCodigo(Pagamento codigoPagamento)throws GeralException{
+        return rnPagamento.pesquisarCodigo(codigoPagamento);
+    }
     /**
      * Retorna um registro do BD de Produto
      * @param nomeProduto
@@ -100,8 +118,7 @@ public class Fachada {
      */
     public  Produto pesqisaProdutoPorNome(Produto nomeProduto)throws GeralException{
         return rnProduto.pesquisarNome(nomeProduto);
-    }
-    
+    }    
     
     public Cliente pesquisaClientePorCpf(String cpf) throws GeralException
     {

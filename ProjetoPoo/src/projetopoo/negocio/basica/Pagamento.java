@@ -55,4 +55,7 @@ public class Pagamento {
     public void setId_pagamento(Integer id_pagamento) {
         this.id_pagamento = id_pagamento;
     }
+    public void setId_pagamento(String id_pagamento){
+        this.id_pagamento = Integer.parseInt(id_pagamento);
+    }
 }
